@@ -9,8 +9,9 @@ class CookiesHelper {
      * @param {string} cookieValue
      * @param {int} expiryDays
      */
-  static setCookie (cookieName, cookieValue, expiryDays) {
+  static setCookie(cookieName, cookieValue, expiryDays, domain) {
     var cookieExpires
+    var cookieDomain
     if (expiryDays) {
       var date = new Date()
       date.setTime(date.getTime() + (expiryDays * 24 * 60 * 60 * 1000))
@@ -18,10 +19,15 @@ class CookiesHelper {
     } else {
       cookieExpires = ''
     }
-    document.cookie = cookieName + '=' + cookieValue + cookieExpires + '; path=/'
+    if (domain) {
+      cookieDomain = '; domain=' + domain
+    } else {
+      cookieDomain = ''
+    }
+    document.cookie = cookieName + '=' + cookieValue + cookieExpires + cookieDomain + '; path=/'
   };
 
-  static getCookie (cookieName) {
+  static getCookie(cookieName) {
     if (document.cookie.length > 0) {
       var cStart = document.cookie.indexOf(cookieName + '=')
       if (cStart !== -1) {

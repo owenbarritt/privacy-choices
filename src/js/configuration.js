@@ -16,7 +16,7 @@ const defaultConfiguration = {
     display: true,
     uri: 'https://example.com/policy'
   },
-  categories: [ ],
+  categories: [],
   language: {
     settings: {
       openButton: 'Privacy',
@@ -41,6 +41,7 @@ const defaultConfiguration = {
   },
   storage: {
     key: 'privacy-choices',
+    domain: null,
     expiryDays: 90
   },
   style: {
@@ -60,9 +61,9 @@ const defaultConfiguration = {
  */
 class PrivacyChoicesConfiguration {
   // Constructor
-  constructor () {
+  constructor() {
     // Read custom config
-    var customConfiguration = window.privacyChoicesConfiguration || { }
+    var customConfiguration = window.privacyChoicesConfiguration || {}
 
     // Merge custom into default, preferring custom values
     this.configuration = deepmerge(defaultConfiguration, customConfiguration)

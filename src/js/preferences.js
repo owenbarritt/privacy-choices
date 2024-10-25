@@ -5,7 +5,7 @@ import CookiesHelper from './cookies'
 // Constants
 const defaultPreferences = {
   'hasUserInteracted': false,
-  'categoryAcceptance': { },
+  'categoryAcceptance': {},
   'consentRefreshedDate': null,
   'consentExpiryDate': null
 }
@@ -14,20 +14,20 @@ class PrivacyChoicesPreferences {
   /**
    * Store user preferences.
    */
-  static writePreferences (preferences) {
+  static writePreferences(preferences) {
     let updatePreferences = defaultPreferences
 
     if (preferences) {
       updatePreferences = preferences
     }
 
-    CookiesHelper.setCookie(PrivacyChoicesConfiguration.storage.key, JSON.stringify(updatePreferences), PrivacyChoicesConfiguration.storage.expiryDays)
+    CookiesHelper.setCookie(PrivacyChoicesConfiguration.storage.key, JSON.stringify(updatePreferences), PrivacyChoicesConfiguration.storage.expiryDays, PrivacyChoicesConfiguration.storage.domain)
   }
 
   /**
    * Recall user preferences.
    */
-  static readPreferences () {
+  static readPreferences() {
     let currentCookie = CookiesHelper.getCookie(PrivacyChoicesConfiguration.storage.key)
 
     let preferences
@@ -42,7 +42,7 @@ class PrivacyChoicesPreferences {
   /**
    * Recall consent choices.
    */
-  static readConsentChoices () {
+  static readConsentChoices() {
     let preferences = this.readPreferences()
 
     let choices
@@ -57,7 +57,7 @@ class PrivacyChoicesPreferences {
   /**
    * Initialise a user's preferences if needed.
    */
-  static initPreferences () {
+  static initPreferences() {
     let preferences = this.readPreferences()
     let needInitialisation = false
 
@@ -104,7 +104,7 @@ class PrivacyChoicesPreferences {
    *
    * Returns the new choices being saved.
    */
-  static setCategoryConsent (categoryKey, isConsented) {
+  static setCategoryConsent(categoryKey, isConsented) {
     let preferences = this.readPreferences()
 
     if (preferences) {
@@ -118,7 +118,7 @@ class PrivacyChoicesPreferences {
   /**
    * Returns whether a category has accepted consent.
    */
-  static isCategoryConsented (categoryKey) {
+  static isCategoryConsented(categoryKey) {
     let isCategoryConsented = false
 
     let preferences = this.readPreferences()
@@ -133,7 +133,7 @@ class PrivacyChoicesPreferences {
   /**
    * Returns whether a user has interacted.
    */
-  static getHasUserInteracted () {
+  static getHasUserInteracted() {
     let hasUserInteracted = false
 
     let preferences = this.readPreferences()
@@ -148,7 +148,7 @@ class PrivacyChoicesPreferences {
   /**
    * Refresh the consent expiry date.
    */
-  static refreshConsent () {
+  static refreshConsent() {
     let preferences = this.readPreferences()
 
     if (preferences) {
